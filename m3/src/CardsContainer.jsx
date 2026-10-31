@@ -2,6 +2,10 @@ import RuneCard from "./RuneCard";
 
 export default function CardsContainer({runeData}){
 
+    if (runeData.length === 0) {
+        return <p className="status-message empty">No runes found under this sign</p>;
+    }
+
     return(
         <section className="runes-container">
             {runeData?.map(rune => (

@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 export default function MainContent(){
     const [searchQuery, setSearchQuery] = useState('');
+    const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [runeData, setRuneData] = useState([]);
 
@@ -12,10 +13,15 @@ export default function MainContent(){
 
         async function getData() {
             try{
+
+                setIsLoading(true);
+                setError(null);
+
                 const data = await getRuneCardInfo(searchQuery); 
                 setRuneData(data);
             }catch(e){
                 console.log(e.stack)
+                setError(`An error ocurred: ${e.message}`);
             }finally{
                 setIsLoading(false); 
             }
@@ -26,7 +32,7 @@ export default function MainContent(){
     
     }, [searchQuery]);
 
-    const filteredData = runeData.filter(rune => {
+    const filteredRunes = runeData.filter(rune => {
         const query = searchQuery?.toLowerCase();
         const nameMatch = rune.name?.toLowerCase().includes(query);
         const translationMatch = rune.translation && rune.translation?.toLowerCase().includes(query);
@@ -40,7 +46,16 @@ export default function MainContent(){
     return (
         <div className="main-content">
             <SearchBar onSearchChange={setSearchQuery} />
-            <CardsContainer runeData={filteredData} />
+            {/* 1. Si está cargando, mostramos esto y cortamos aquí */}
+            {isLoading && <div className="status-message loading">Invoking runes... Loading wisdom...</div>}
+
+            {/* 2. Si hay error, mostramos el error */}
+            {error && <div className="status-message error">{error}</div>}
+
+            {/* 3. Si todo va bien, mostramos el contenedor de cartas */}
+            {!isLoading && !error && (
+                <CardsContainer runeData={filteredRunes} />
+            )}
         </div>
     );
 
