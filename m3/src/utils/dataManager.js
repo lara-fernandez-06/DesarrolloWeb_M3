@@ -18,23 +18,8 @@ export async function getAllRuneSymbols() {
     
 }
 
-//busca la información que necesita
-export async function getFilteredCardsInfo(filterText=""){
-
-    //primero miramos si tenemos los datos de las cartas preparados en cache
-    let data = cache.getLocalCache(filteredElderDataKey);
-    if(!data){
-        data = await getRuneCardInfo();
-        cache.setLocalCache(filteredElderDataKey, data);
-    } 
-
-    return transform.filterCards(data, filterText ?? "");
-
-
-}
-
 //es privada porque al main solo le interesa tener los datos preparados ya para comunicarselo a la ui
-async function getRuneCardInfo(){
+export async function getRuneCardInfo(){
 
     //miramos si el archivo 'raw' está en cache, si no lo pedimos a la api
     let data = cache.getLocalCache(rawElderFileKey);

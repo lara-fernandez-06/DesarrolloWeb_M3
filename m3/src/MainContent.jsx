@@ -1,4 +1,4 @@
-import { getFilteredCardsInfo } from "./utils/dataManager"
+import {getRuneCardInfo} from "./utils/dataManager"
 import SearchBar from './SearchBar';
 import CardsContainer from './CardsContainer';
 import { useState, useEffect } from 'react';
@@ -12,7 +12,7 @@ export default function MainContent(){
 
         async function getData() {
             try{
-                const data = await getFilteredCardsInfo(searchQuery); 
+                const data = await getRuneCardInfo(searchQuery); 
                 setRuneData(data);
             }catch(e){
                 console.log(e.stack)
@@ -26,6 +26,13 @@ export default function MainContent(){
     
     }, [searchQuery]);
 
+    const filteredData = runeData.filter(rune => {
+        const query = searchQuery?.toLowerCase();
+        const nameMatch = rune.name?.toLowerCase().includes(query);
+        const translationMatch = rune.translation && rune.translation?.toLowerCase().includes(query);
+        return nameMatch || translationMatch;
+    });
+
     if (isLoading) {
         //TODO
     }
@@ -33,7 +40,7 @@ export default function MainContent(){
     return (
         <div className="main-content">
             <SearchBar onSearchChange={setSearchQuery} />
-            <CardsContainer runeData={runeData} />
+            <CardsContainer runeData={filteredData} />
         </div>
     );
 

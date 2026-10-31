@@ -1,5 +1,3 @@
-import { getFilteredCardsInfo } from "./utils/dataManager"
-import { useState, useEffect} from 'react';
 import RuneCard from "./RuneCard";
 
 export default function CardsContainer({runeData}){
