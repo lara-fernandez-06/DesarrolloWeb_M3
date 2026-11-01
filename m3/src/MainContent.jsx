@@ -1,36 +1,12 @@
-import {getRuneCardInfo} from "./utils/dataManager"
 import SearchBar from './SearchBar';
 import CardsContainer from './CardsContainer';
-import { useState, useEffect } from 'react';
+import {useState} from 'react';
+import {useRunes} from './UseRunes'
 
 export default function MainContent(){
     const [searchQuery, setSearchQuery] = useState('');
-    const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [runeData, setRuneData] = useState([]);
-
-    useEffect(() => {
-
-        async function getData() {
-            try{
-
-                setIsLoading(true);
-                setError(null);
-
-                const data = await getRuneCardInfo(searchQuery); 
-                setRuneData(data);
-            }catch(e){
-                console.log(e.stack)
-                setError(`An error ocurred: ${e.message}`);
-            }finally{
-                setIsLoading(false); 
-            }
-            
-        }
-
-        getData()
-    
-    }, [searchQuery]);
+    // Extraemos todo del hook personalizado
+    const {runeData, isLoading, error, refetch } = useRunes();
 
     const filteredRunes = runeData.filter(rune => {
         const query = searchQuery?.toLowerCase();
@@ -50,7 +26,13 @@ export default function MainContent(){
             {isLoading && <div className="status-message loading">Invoking runes... Loading wisdom...</div>}
 
             {/* 2. Si hay error, mostramos el error */}
-            {error && <div className="status-message error">{error}</div>}
+            {error && !isLoading && (
+                <div className="status-message error">
+                    {error}
+                    <br />
+                    <button className="try-again-btn" onClick={refetch}>Try Again</button>
+                </div>
+            )}
 
             {/* 3. Si todo va bien, mostramos el contenedor de cartas */}
             {!isLoading && !error && (
