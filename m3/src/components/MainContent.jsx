@@ -9,14 +9,15 @@ export default function MainContent(){
     const { fetchState, refetch } = useRunes();
 
 
-    const filteredRunes = fetchState.status === 'success'
-    ? fetchState.data.filter(rune => {
+    function filterData(){
+        return fetchState.data.filter(rune => {
             const query = searchQuery?.toLowerCase();
             const nameMatch = rune.name?.toLowerCase().includes(query);
             const translationMatch = rune.translation && rune.translation?.toLowerCase().includes(query);
             return nameMatch || translationMatch;
-        })
-    : [];
+        });
+    }
+    const filteredRunes = fetchState.status === 'success' ? filterData(searchQuery) : [];
 
     return (
         <div className="main-content">
