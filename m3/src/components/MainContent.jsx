@@ -19,15 +19,21 @@ export default function MainContent(){
         <div className="main-content">
             <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
             {/* 1. Si está cargando, mostramos esto y cortamos aquí */}
-            {isLoading && <div className="status-message loading">Invoking runes... Loading wisdom...</div>}
+            {isLoading && (
+                //pongo el div de runes-container para poder manejar la posición del mensaje
+                <section className='runes-container'>
+                    <div className="status-message loading">Invoking runes... Loading wisdom...</div>
+                </section>
+            )}
 
             {/* 2. Si hay error, mostramos el error */}
             {error && !isLoading && (
-                <div className="status-message error">
-                    {error}
-                    <br />
-                    <button className="try-again-btn" onClick={refetch}>Try Again</button>
-                </div>
+                <section className='runes-container'>
+                    <div className="status-message error">
+                        {error}
+                        <button className="try-again-btn" onClick={refetch}>Try Again</button>
+                    </div>
+                </section>
             )}
 
             {/* 3. Si todo va bien, mostramos el contenedor de cartas */}
