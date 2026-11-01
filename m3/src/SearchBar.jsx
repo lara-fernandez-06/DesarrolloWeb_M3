@@ -1,4 +1,4 @@
-export default function SearchBar({ onSearchChange }) {
+export default function SearchBar({ searchQuery, onSearchChange }) {
   
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
@@ -8,11 +8,13 @@ export default function SearchBar({ onSearchChange }) {
   };
 
   return (
-    <div className="search-container">
+    <div className="filters-container">
       <input 
+        className="rune-input"
         type="text" 
-        placeholder="Escribe y presiona Enter..." 
-        onKeyDown={handleKeyDown} 
+        placeholder="Searching for wisdom...?" 
+        value={searchQuery} /*Asegura que se renderiza correctamente y que no queden restos sin limpiar*/
+        onChange={(e) => onSearchChange(e.target.value)}
       />
     </div>
   );

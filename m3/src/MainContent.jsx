@@ -17,7 +17,7 @@ export default function MainContent(){
 
     return (
         <div className="main-content">
-            <SearchBar onSearchChange={setSearchQuery} />
+            <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
             {/* 1. Si está cargando, mostramos esto y cortamos aquí */}
             {isLoading && <div className="status-message loading">Invoking runes... Loading wisdom...</div>}
 
