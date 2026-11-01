@@ -1,6 +1,6 @@
 import RuneCarousel from "./RuneCarousel"
 
-export default function Header(fetchState){
+export default function Header({fetchState}){
     return(
         <header className="rune-header">
             <div className="rune-banner">

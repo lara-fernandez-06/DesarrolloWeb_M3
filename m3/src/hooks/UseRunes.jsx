@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { getRuneCardInfo } from '../utils/dataManager';
 
 export function useRunes() {
@@ -8,13 +8,16 @@ export function useRunes() {
         error: null
     });
 
-    //importamos callback para que si se usa varias veces el hook, use la misma función y no cree otra igual en la memoria
-    const fetchRunes = useCallback(async (controller) => {
-        setFetchState({ status: 'loading', data: [], error: null });
-        
+    const controllerRef = useRef(null);
+
+    const loadRunes = useCallback(async () => {
+        controllerRef.current?.abort();
+        const controller = new AbortController();
+        controllerRef.current = controller;
+
         try {
             const data = await getRuneCardInfo(controller.signal);
-            
+
             if (!controller.signal.aborted) {
                 setFetchState({ status: 'success', data, error: null });
             }
@@ -26,17 +29,17 @@ export function useRunes() {
     }, []);
 
     useEffect(() => {
-        const controller = new AbortController();
-        
-        fetchRunes(controller);
+        loadRunes();
 
         return () => {
-            controller.abort();
+            controllerRef.current?.abort();
         };
-    }, [fetchRunes]); 
+    }, [loadRunes]);
 
-    return { 
-        fetchState, 
-        refetch: () => fetchRunes(new AbortController()) 
-    };
+    const refetch = useCallback(() => {
+        setFetchState({ status: 'loading', data: [], error: null });
+        loadRunes();
+    }, [loadRunes]);
+
+    return { fetchState, refetch };
 }

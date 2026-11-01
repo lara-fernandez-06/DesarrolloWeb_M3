@@ -1,6 +1,6 @@
-import { useRunes } from '../hooks/UseRunes'; 
+const CAROUSEL_COPIES = 3;
 
-export default function RuneCarousel(fetchState) {
+export default function RuneCarousel({fetchState}) {
 
     // 2. Si no estamos en fase de éxito, o la baraja está vacía, ocultamos el carrusel
     if (fetchState.status !== 'success' || fetchState.data.length === 0) {
@@ -13,7 +13,7 @@ export default function RuneCarousel(fetchState) {
     return(
         <div className='rune-carousel'>
             <div className='carousel-track'>
-                {Array.from({ length: 3 }).map((_, index) => (
+                {Array.from({ length: CAROUSEL_COPIES }).map((_, index) => (
                     <span key={index} className="carousel-group">
                         {runeString}•{runeString}
                     </span>

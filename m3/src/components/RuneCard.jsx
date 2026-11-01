@@ -5,9 +5,11 @@ export default function RuneCard({cardInfo}){
 
     const [isFlipped, setIsFlipped] = useState(false);
 
+    const toggleFlip = () => setIsFlipped(flipped => !flipped);
+
     return(
         <div className="rune-card-container">
-            <div className={`rune-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() =>{setIsFlipped(flipped => !flipped)}}>
+            <div className={`rune-card ${isFlipped ? 'is-flipped' : ''}`} onClick={toggleFlip}>
                 <div className="card-face card-face-front">
                     <div className="card-symbol">{cardInfo.character??''}</div>
                     <h3 className="card-title">{cardInfo.name}</h3>
@@ -25,7 +27,7 @@ export default function RuneCard({cardInfo}){
                             <span className="back-label">PRACTICAL APPLICATION</span>
                             <p className="card-description">{cardInfo.application}</p>
                         </div>
-                        <div className="back-content poem-section">
+                        <div className="poem-section">
                             <p className="back-poem">{cardInfo.poem}</p>
                             <span className="back-poem-origin">— {cardInfo.poemOrigin}</span>
                         </div>

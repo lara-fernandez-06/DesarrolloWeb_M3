@@ -1,12 +1,5 @@
 export default function SearchBar({ searchQuery, onSearchChange }) {
   
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      // e.target es el input. .value es lo que el usuario escribió en ese instante.
-      onSearchChange(e.target.value);
-    }
-  };
-
   return (
     <div className="filters-container">
       <input 

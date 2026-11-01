@@ -2,7 +2,7 @@ Misión M3 · React Core — Web Development I.
 
 ## Cómo probarlo
 Ejecuta 'npm run dev' para ver la página en el navegador. Inmeadiatamente, tendrás todas las runas a tu disposición con sus nombres y significados. Si quieres buscar
-una runa en concreto o un significado en concreto, puedes hacer uso del buscador, que al darle al enter te enseñará las runas que coinciden. Haz click en cualquier
+una runa en concreto o un significado en concreto, puedes hacer uso del buscador, que mientras buscas te enseñará las runas que coinciden. Haz click en cualquier
 tarjeta para darle la vuelta y ver su uso práctico y un verso de un poema antiguo relacionado con ella.
 
 ## Uso de IA
