@@ -1,4 +1,3 @@
-
 //en esta funcion nos quedaremos las partes del json que nos interesan para las tarjetas
 export function getRuneCardInfo(rawData){
 

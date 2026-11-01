@@ -2,7 +2,7 @@ const NORSE_URL = "https://raw.githubusercontent.com/ksherbondy/norse-heathenry-
 
 export async function getFullFile(file) {
 
-    const answer = await fetch(`${NORSE_URL}${file}`);
+    const answer = await fetch(`${NORSE_URL}/${file}`);
 
     // fetch NO rechaza con errores HTTP (404, 500): hay que comprobar ok
     if (!answer.ok) {
