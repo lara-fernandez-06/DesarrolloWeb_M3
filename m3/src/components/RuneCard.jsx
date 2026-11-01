@@ -7,7 +7,7 @@ export default function RuneCard({cardInfo}){
 
     return(
         <div className="rune-card-container">
-            <div className={`rune-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() =>{setIsFlipped(!isFlipped)}}>
+            <div className={`rune-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() =>{setIsFlipped(flipped => !flipped)}}>
                 <div className="card-face card-face-front">
                     <div className="card-symbol">{cardInfo.character??''}</div>
                     <h3 className="card-title">{cardInfo.name}</h3>

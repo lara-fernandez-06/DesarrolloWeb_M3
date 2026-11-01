@@ -1,8 +1,6 @@
 import { useRunes } from '../hooks/UseRunes'; 
 
-export default function RuneCarousel() {
-    // 1. Usamos el hook con el nuevo patrón de estado finito
-    const { fetchState } = useRunes();
+export default function RuneCarousel(fetchState) {
 
     // 2. Si no estamos en fase de éxito, o la baraja está vacía, ocultamos el carrusel
     if (fetchState.status !== 'success' || fetchState.data.length === 0) {
@@ -11,7 +9,6 @@ export default function RuneCarousel() {
 
     // 3. Extraemos los símbolos apuntando a fetchState.data
     const runeString = fetchState.data.map(rune => rune.character).join('•');
-    // console.log(runeString); // Puedes borrar este log si ya comprobaste que funciona
 
     return(
         <div className='rune-carousel'>

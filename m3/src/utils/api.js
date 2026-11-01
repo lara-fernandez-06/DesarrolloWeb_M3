@@ -1,8 +1,8 @@
 const NORSE_URL = "https://raw.githubusercontent.com/ksherbondy/norse-heathenry-pagan-api-dataset/main/JSON-files"
 
-export async function getFullFile(file) {
+export async function getFullFile(file, signal) {
 
-    const answer = await fetch(`${NORSE_URL}/${file}`);
+    const answer = await fetch(`${NORSE_URL}/${file}`, {signal});
 
     // fetch NO rechaza con errores HTTP (404, 500): hay que comprobar ok
     if (!answer.ok) {

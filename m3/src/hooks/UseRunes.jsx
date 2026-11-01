@@ -13,7 +13,7 @@ export function useRunes() {
         setFetchState({ status: 'loading', data: [], error: null });
         
         try {
-            const data = await getRuneCardInfo();
+            const data = await getRuneCardInfo(controller.signal);
             
             if (!controller.signal.aborted) {
                 setFetchState({ status: 'success', data, error: null });

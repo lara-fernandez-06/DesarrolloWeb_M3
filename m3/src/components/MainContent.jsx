@@ -1,27 +1,24 @@
 import SearchBar from './SearchBar';
 import CardsContainer from './CardsContainer';
 import {useState} from 'react';
-import {useRunes} from '../hooks/UseRunes'
 
-export default function MainContent(){
+export default function MainContent({fetchState, refetch}){
     const [searchQuery, setSearchQuery] = useState('');
-    // Extraemos todo del hook personalizado
-    const { fetchState, refetch } = useRunes();
 
-
-    function filterData(){
-        return fetchState.data.filter(rune => {
-            const query = searchQuery?.toLowerCase();
-            const nameMatch = rune.name?.toLowerCase().includes(query);
-            const translationMatch = rune.translation && rune.translation?.toLowerCase().includes(query);
+    function filterData(query, data){
+        return data.filter(rune => {
+            const safeQuery = query?.toLowerCase();
+            const nameMatch = rune.name?.toLowerCase().includes(safeQuery);
+            const translationMatch = rune.translation && rune.translation?.toLowerCase().includes(safeQuery);
             return nameMatch || translationMatch;
         });
     }
-    const filteredRunes = fetchState.status === 'success' ? filterData(searchQuery) : [];
+    const filteredRunes = fetchState.status === 'success' ? filterData(searchQuery, fetchState.data) : [];
 
     return (
         <div className="main-content">
             <SearchBar searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+            
             {/* 1. Si está cargando, mostramos esto y cortamos aquí */}
             {fetchState.status==='loading' && (
                 //pongo el div de runes-container para poder manejar la posición del mensaje
