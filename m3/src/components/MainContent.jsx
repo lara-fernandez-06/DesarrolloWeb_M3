@@ -1,7 +1,7 @@
 import SearchBar from './SearchBar';
 import CardsContainer from './CardsContainer';
 import {useState} from 'react';
-import {useRunes} from './UseRunes'
+import {useRunes} from '../hooks/UseRunes'
 
 export default function MainContent(){
     const [searchQuery, setSearchQuery] = useState('');

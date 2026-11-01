@@ -1,4 +1,4 @@
-import { useRunes } from './UseRunes'; // Ajusta la ruta a tu hook
+import { useRunes } from '../hooks/UseRunes'; // Ajusta la ruta a tu hook
 
 export default function RuneCarousel() {
     // 1. Usamos el hook mágico que ya hace el fetch, el try/catch y el cleanup

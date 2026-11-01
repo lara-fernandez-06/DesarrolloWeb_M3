@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getRuneCardInfo } from './utils/dataManager'
+import { getRuneCardInfo } from '../utils/dataManager'
 
 export function useRunes() {
     const [runeData, setRuneData] = useState([]);

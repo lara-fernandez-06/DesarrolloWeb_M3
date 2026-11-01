@@ -3,7 +3,7 @@
     font-style: normal;
     font-weight: normal;
     font-display: auto;
-    src: url('./assets/fonts/Norsebold.ttf');
+    src: url('../assets/fonts/Norsebold.ttf');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
     font-style: normal;
     font-weight: 100;
     font-display: auto;
-    src: url('./assets/fonts/TypeWriter.ttf');
+    src: url('../assets/fonts/TypeWriter.ttf');
 }
 
 @keyframes scrollTicker {
@@ -58,7 +58,7 @@ html, body, #root {
     color: #f3f3f3;
     /* resplandor dorado en la caja */
     box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(243, 198, 83, 0.05);
-    background-image: url('assets/img/stoneBG.jpg');
+    background-image: url('../assets/img/stoneBG.jpg');
 }
 
 
