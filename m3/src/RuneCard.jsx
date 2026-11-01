@@ -5,11 +5,6 @@ export default function RuneCard({cardInfo}){
 
     const [isFlipped, setIsFlipped] = useState(false);
 
-    {/*TODO: hacer comprobacion de formato*/}
-    if(!cardInfo){
-        {/*TODO: mensaje de error si es incorrecto*/}
-    }
-
     return(
         <div className="rune-card-container">
             <div className={`rune-card ${isFlipped ? 'is-flipped' : ''}`} onClick={() =>{setIsFlipped(!isFlipped)}}>

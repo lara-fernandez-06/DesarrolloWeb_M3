@@ -15,10 +15,6 @@ export default function MainContent(){
         return nameMatch || translationMatch;
     });
 
-    if (isLoading) {
-        //TODO
-    }
-
     return (
         <div className="main-content">
             <SearchBar onSearchChange={setSearchQuery} />
